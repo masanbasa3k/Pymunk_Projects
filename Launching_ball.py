@@ -41,6 +41,23 @@ def create_boundaries(space, width, height):
         shape.friction = 0.5
         space.add(body, shape)
 
+def create_scructure(space, width, height):
+    BLUE = (113, 164, 164, 100)
+    rects = [
+        [(600, height - 120), (40, 200), BLUE, 100],
+        [(900, height - 120), (40, 200), BLUE, 100],
+        [(750, height - 250), (340, 40), BLUE, 150]
+    ]
+
+    for pos, size, color, mass in rects:
+        body = pymunk.Body()
+        body.position = pos
+        shape = pymunk.Poly.create_box(body, size, radius=1)
+        shape.color = color
+        shape.mass = mass
+        shape.elasticity = 0.4
+        shape.friction = 0.4
+        space.add(body, shape)
 
 def create_ball(space, radius, mass, pos):
     body = pymunk.Body(body_type=pymunk.Body.STATIC)
@@ -66,6 +83,7 @@ def run(window, width, height):
 
     # ball = create_ball(space, 30, 10)
     create_boundaries(space, width, height)
+    create_scructure(space, width, height)
 
     draw_options = pymunk.pygame_util.DrawOptions(window)
 
